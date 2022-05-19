@@ -25,7 +25,7 @@ function Install_ADDS {
             New-ADGroup -Name "$($tmp_group)_Share_File1_RA" -GroupScope DomainLocal -GroupCategory Security -Description "$tmp_group Read Access" 
             New-ADGroup -Name "$($tmp_group)_Share_File1_CA" -GroupScope DomainLocal -GroupCategory Security -Description "$tmp_group Change Access" 
             New-ADGroup -Name "$($tmp_group)_Share_File1_FA" -GroupScope DomainLocal -GroupCategory Security -Description "$tmp_group Full Access"
-            Add-ADGroupMember -Identity $tmp_group -Members "$($tmp_group)_Share_File1_RA","$($tmp_group)_Share_File1_CA","$($tmp_group)_Share_File1_FA"
+            Add-ADGroupMember -Identity "$tmp_group" -Members "$($tmp_group)_Share_File1_RA","$($tmp_group)_Share_File1_CA","$($tmp_group)_Share_File1_FA"
         }
 
         $amountOfUsers = Read-Host "Hvor mange brugere vil du lave?"
