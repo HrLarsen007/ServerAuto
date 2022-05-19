@@ -1,10 +1,10 @@
-# Setting Variables that would be needed to setup the services
+# Sætter Variabler som vi skal bruge i nogle af vores installations processores
 
 $DomainName = Read-Host "Domain Navn (Example: Spaceballs)"
 $DomainEnd = Read-Host "Domain end  (Example: com"
 $DomainPcName = Read-Host "PC Name (Example: DC1)"
 
-# Install ADDS Service
+# Installation af ADDS Service
 $ConfirmPreference="high"
 function Install_ADDS {
     [CmdletBinding(
@@ -39,28 +39,29 @@ function Install_ADDS {
     }
 }
 
+# Installation af DHCP
 function Install_DHCP {
     [CmdletBinding(
     SupportsShouldProcess = $true,
     ConfirmImpact = 'High')]
     param($param)
     if ($PSCmdlet.ShouldProcess($param)) {
-        #Install DHCP
+        # Installation af DHCP Service
         Install-WindowsFeature DHCP -IncludeManagementTools
 
-        #Create DHCP security group
+        # Laver en DHCP security group
         netsh dhcp add securitygroups
 
-        #Restart DHCP Service
+        # Genstarter DHCP Service
         Restart-Service dhcpserver
 
-        #Authorize the DHCP-Server
+        # Authorize the DHCP-Server
         Add-DhcpServerInDC -DnsName "$($DomainPcName).$($DomainName).$($DomainEnd)" -IPAddress 192.168.1.2
 
-        #Enable Dynamic DNS updates
+        # Enable Dynamic DNS updates
         Set-DhcpServerv4DnsSetting -ComputerName "$($DomainPcName).$($DomainName).$($DomainEnd)" -DynamicUpdates "Always" -DeleteDnsRRonLeaseExpiry $True
 
-        #Configure the scope
+        # Konfigurarer scopet
         Add-DhcpServerv4Scope -name "$DomainName" -StartRange 192.168.1.11 -EndRange 192.168.1.254 -SubnetMask 255.255.255.0 -State Active
         Add-DhcpServerv4ExclusionRange -ScopeID 192.168.1.0 -StartRange 192.168.1.1 -EndRange 192.168.1.10
         Set-DhcpServerv4OptionValue -OptionID 3 -Value 192.168.1.1 -ScopeID 192.168.1.0
@@ -68,23 +69,30 @@ function Install_DHCP {
     }
 }
 
+## Installation af File-Server
 function Install_SHARE {
     [CmdletBinding(
     SupportsShouldProcess = $true,
     ConfirmImpact = 'High')]
     param($param)
     if ($PSCmdlet.ShouldProcess($param)) {
-
+        # Installtion af File-Services
         Install-WindowsFeature File-Services
+
+        # Laver folders til at share
         md C:\File1\Salg
         md C:\File1\HR
         md C:\File1\IT
+
+        # Opretter Shares til vores folders
         New-SmbShare -Name IT -Path C:\File1\Salg -EncryptData $True -FullAccess IT_Share_File1_FA -ReadAccess HR_Share_File1_RA, Salg_Share_File1_RA
         New-SmbShare -Name HR -Path C:\File1\HR -EncryptData $True -FullAccess IT_Share_File1_FA -ChangeAccess HR_Share_File1_CA
         New-SmbShare -name Salg -Path C:\File1\Salg -EncryptData $True -FullAccess IT_Share_File1_FA -ChangeAccess Salg_Share_File1_CA
     }
 }
 
+
+# Køre funktionerne
 Install_ADDS
 Install_DHCP
 Install_SHARE
