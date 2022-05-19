@@ -19,7 +19,7 @@ function Install_ADDS {
 
         New-ADOrganizationalUnit -Name "BrugerAccounts" -Path "DC="$($DomainName)",DC="$($DomainEnd)""
         $amountOfGroups = Read-HosT "Hvor mange groups vil du lave?"
-        for($i=0; $i -le $amountOfGroups; $i++){
+        for($i=1; $i -le $amountOfGroups; $i++){
             $tmp_group = Read-Host "Group Navn"
             New-ADGroup -Name $tmp_group -GroupScope DomainLocal
             New-ADGroup -Name "$($tmp_group)_Share_File1_RA" -GroupScope DomainLocal -GroupCategory Security -Description "$tmp_group Read Access" 
@@ -29,7 +29,7 @@ function Install_ADDS {
         }
 
         $amountOfUsers = Read-Host "Hvor mange brugere vil du lave?"
-        for($i=0; $i -le $amountOfUsers; $i++){
+        for($i=1; $i -le $amountOfUsers; $i++){
             $tmp_navn = Read-Host "Navn"
             $tmp_department = Read-Host "Afdeling"
 
