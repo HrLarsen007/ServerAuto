@@ -26,3 +26,4 @@ for($i=0; $i -le $amountOfUsers; $i++){
     New-ADUser -Name $tmp_navn -Accountpassword (Read-Host -AsSecureString "Password for $tmp_navn")  -path "OU=BrugerAccounts, DC=$DomainName, DC=com" -Enabled $true
     Add-ADGroupMember -Identity $tmp_department -Members $tmp_navn
 }
+#123
