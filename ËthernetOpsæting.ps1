@@ -5,7 +5,6 @@ $Cider = Read-Host "Enter MASKBits/Cider"
 $Gateway = Read-Host "Enter gateway (192.168.1.1 example)"
 $Dns = Read-Host "Enter DNS (8.8.8.8 example)"
 $DomainName = Read-Host "Enter Domain Name (windowsSux example)"
-$PCNavn = Read-Host "PC Navn (DC1 example)"
 
 # Finder adapter
 $adapter = Get-NetAdapter | Where-Object {$_.Status -eq "up"}

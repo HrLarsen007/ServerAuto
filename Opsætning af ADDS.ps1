@@ -33,7 +33,7 @@ function Install_ADDS {
             $tmp_navn = Read-Host "Navn"
             $tmp_department = Read-Host "Afdeling"
 
-            New-ADUser -Name "$tmp_navn" -Accountpassword (Read-Host -AsSecureString "Password")  -Path "OU=BrugerAccounts, DC="$($DomainName)", DC="$($DomainEnd)"" -Enabled $true
+            New-ADUser -Name "$tmp_navn" -Accountpassword (Read-Host -AsSecureString "Password")  -Path "OU=BrugerAccounts, DC="$($DomainName)" , DC="$($DomainEnd)"" -Enabled $true
             Add-ADGroupMember -Identity "$tmp_department" -Members "$tmp_navn"
         }
     }
