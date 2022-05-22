@@ -19,11 +19,10 @@ $adapter | New-NetIPAddress `
 # Konfigurere DNS klient server IP Addresses
 $adapter | Set-DnsClientServerAddress -ServerAddresses "192.168.1.2"
 
-
+Install-WindowsFeature -Name RSAT-AD-PowerShell
+Add-WindowsCapability –online –Name “Rsat.ActiveDirectory.DS-LDS.Tools~~~~0.0.1.0”
 Add-WindowsFeature AD-Domain-Services
 Import-Module ADDSDeployment
 Import-Module ServerManager
 Import-Module ActiveDirectory
-Install-WindowsFeature -Name RSAT-AD-PowerShell
-Add-WindowsCapability –online –Name “Rsat.ActiveDirectory.DS-LDS.Tools~~~~0.0.1.0”
 Install-ADDSForest -DomainName "WindowsSux.com" -InstallDNS #-NoRebootOnCompletion

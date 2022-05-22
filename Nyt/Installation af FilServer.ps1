@@ -12,18 +12,13 @@ If (($adapter | Get-NetIPConfiguration).Ipv4DefaultGateway) {
 # Konfigurere IP address og default gateway
 $adapter | New-NetIPAddress `
 -AddressFamily "IPv4" `
--IPAddress "192.168.1.2" `
+-IPAddress "192.168.1.3" `
 -PrefixLength "24" `
 -DefaultGateway "192.168.1.1"
 
 # Konfigurere DNS klient server IP Addresses
 $adapter | Set-DnsClientServerAddress -ServerAddresses "192.168.1.2"
 
+Install-WindowsFeature File-Services
 
-Add-WindowsFeature AD-Domain-Services
-Import-Module ADDSDeployment
-Import-Module ServerManager
-Import-Module ActiveDirectory
-Install-WindowsFeature -Name RSAT-AD-PowerShell
-Add-WindowsCapability –online –Name “Rsat.ActiveDirectory.DS-LDS.Tools~~~~0.0.1.0”
-Install-ADDSForest -DomainName "WindowsSux.com" -InstallDNS #-NoRebootOnCompletion
+Add-Computer -DomainName "WindowsSux" -Restart
