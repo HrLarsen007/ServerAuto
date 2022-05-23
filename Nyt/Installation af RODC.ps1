@@ -25,6 +25,5 @@ Add-WindowsFeature AD-Domain-Services
 Import-Module ADDSDeployment
 Import-Module ServerManager
 Import-Module ActiveDirectory
-#Add-ADDSReadOnlyDomainControllerAccount
-
 Add-Computer -DomainName WindowsSux -Restart
+Install-ADDSDomainController -Credential (Get-Credential) -DomainName "WindowsSux.com" -InstallDNS:$true -ReadOnlyReplica:$true -SiteName "Site2" -Force:$true

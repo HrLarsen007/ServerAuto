@@ -1,10 +1,12 @@
+
+
 # Finder adapter
 $adapter = Get-NetAdapter | Where-Object {$_.Status -eq "up"}
 
 # Fjerner de exsisterne IP og gateways fra ipv4 adapteren.
 If (($adapter | Get-NetIPConfiguration).IPv4Address.IPAddress) {
     $adapter | Remove-NetIPAddress -AddressFamily "IPv4" -Confirm:$false
-}
+
 If (($adapter | Get-NetIPConfiguration).Ipv4DefaultGateway) {
     $adapter | Remove-NetRoute -AddressFamily "IPv4" -Confirm:$false
 }
@@ -26,3 +28,7 @@ Import-Module ADDSDeployment
 Import-Module ServerManager
 Import-Module ActiveDirectory
 Install-ADDSForest -DomainName "WindowsSux.com" -InstallDNS
+
+New-ADReplicationSite -Name "Site2"
+Add-ADDSReadOnlyDomainControllerAccount -DomainControllerAccountName "EnterAdmin" -DomainName "WindowsSux.com" -SiteName "Site2"
+
