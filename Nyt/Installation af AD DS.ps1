@@ -25,4 +25,4 @@ Add-WindowsFeature AD-Domain-Services -IncludeManagementTools
 Import-Module ADDSDeployment
 Import-Module ServerManager
 Import-Module ActiveDirectory
-Install-ADDSForest -DomainName "WindowsSux.com" -InstallDNS #-NoRebootOnCompletion
+Install-ADDSForest -DomainName "WindowsSux.com" -InstallDNS
