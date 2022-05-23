@@ -1,42 +1,20 @@
-$fødeår = Read-Host("Hvad årstal er du født i?")
-$alder = (Get-Date).Year - $fødeår
+$Fødselsår = Read-Host ("Hvilket år er du først i?")
+$Alder = (Get-date).Year - $Fødselsår
 
-if ($alder -lt 1) {
+if ($Alder -lt 1) {Write-host "NYFØDT! Du er desværre ikke gammel nok til at blive ansat."}
 
-    Write-Host("Du er desværre blevet afvist da du ikke er inden for den aldersgruppe vi søger")
-}
-elseif ($alder -lt 2) {
+elseif ($Alder -lt 3) {Write-host "BABY! Du er desværre ikke gammel nok til at blive ansat."}
 
-    Write-Host("Du er desværre blevet afvist da du ikke er inden for den aldersgruppe vi søger")
-} 
-elseif ($alder -lt 5) {
+elseif ($Alder -lt 10) {Write-host "BARN! Du er desværre ikke gammel nok til at blive ansat."}
 
-    Write-Host("Du er desværre blevet afvist da du ikke er inden for den aldersgruppe vi søger")
-}
-elseif ($alder -lt 9) {
+elseif ($Alder -lt 13) {Write-host "UNG! Du er desværre ikke gammel nok til at blive ansat."}
 
-    Write-Host("Du er desværre blevet afvist da du ikke er inden for den aldersgruppe vi søger")
-}
-elseif ($alder -lt 18) {
+elseif ($Alder -lt 20) {Write-host "TEENAGER! Du er desværre ikke gammel nok til at blive ansat."}
 
-    Write-Host("Du er desværre blevet afvist da du ikke er inden for den aldersgruppe vi søger")
-}
-elseif ($alder -lt 39) {
+elseif ($Alder -lt 45) {Write-host "VOKSEN! Tillykke du er ansat, KOM IGANG!!!."}
 
-    Write-Host("Du er ansat da du er i den aldersgruppe vi søger")
-}
-elseif ($alder -lt 59) {
+elseif ($Alder -gt 60) {Write-host "MIDDELALDERLIG! Du er desværre for gammel til at blive ansat."}
 
-    Write-Host("Du er desværre blevet afvist da du ikke er inden for den aldersgruppe vi søger")
-}
-elseif ($alder -lt 60) {
+elseif ($Alder -gt 70) {Write-host "GAMMEL! Du er desværre for gammel til at blive ansat."}
 
-    Write-Host("Du er desværre blevet afvist da du ikke er inden for den aldersgruppe vi søger")
-}
-elseif ($alder -lt 100) {
-
-   Write-Host("Du er desværre blevet afvist da du ikke er inden for den aldersgruppe vi søger")
-}
-else {
-    Write-Host("Du er desværre blevet afvist da du ikke er inden for den aldersgruppe vi søger")
-}
+elseif ($Alder -gt 70) {Write-host "METUSALEMS GAMMEL! Du er desværre for gammel til at blive ansat."}
