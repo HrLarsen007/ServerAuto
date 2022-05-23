@@ -21,7 +21,7 @@ $adapter | Set-DnsClientServerAddress -ServerAddresses "192.168.1.2"
 
 Install-WindowsFeature -Name RSAT-AD-PowerShell
 Add-WindowsCapability –online –Name “Rsat.ActiveDirectory.DS-LDS.Tools~~~~0.0.1.0”
-Add-WindowsFeature AD-Domain-Services
+Add-WindowsFeature AD-Domain-Services -IncludeManagementTools
 Import-Module ADDSDeployment
 Import-Module ServerManager
 Import-Module ActiveDirectory

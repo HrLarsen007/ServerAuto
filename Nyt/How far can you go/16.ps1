@@ -1,7 +1,7 @@
 $fødeår = Read-Host("Hvad årstal er du født i?")
 $alder = (Get-Date).Year - $fødeår
 
-if ($alder -le 1) {
+if ($alder -lt 1) {
 
     Write-Host("Du er desværre blevet afvist da du ikke er inden for den aldersgruppe vi søger")
 }
@@ -15,7 +15,7 @@ elseif ($alder -lt 5) {
 }
 elseif ($alder -lt 9) {
 
-   Write-Host("Du er desværre blevet afvist da du ikke er inden for den aldersgruppe vi søger")
+    Write-Host("Du er desværre blevet afvist da du ikke er inden for den aldersgruppe vi søger")
 }
 elseif ($alder -lt 18) {
 

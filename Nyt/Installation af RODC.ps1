@@ -25,6 +25,6 @@ Add-WindowsFeature AD-Domain-Services
 Import-Module ADDSDeployment
 Import-Module ServerManager
 Import-Module ActiveDirectory
-Add-ADDSReadOnlyDomainControllerAccount
+#Add-ADDSReadOnlyDomainControllerAccount
 
 Add-Computer -DomainName WindowsSux -Restart
